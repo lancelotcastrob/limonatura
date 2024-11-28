@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reducir Stock</title>
+    <!-- Agrega Bootstrap CSS desde un CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Reducir Stock para {{ producto.nombre }}</h1>
+        <form method="POST" class="mt-4">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="cantidad">Cantidad a reducir:</label>
+                <input type="number" name="cantidad" min="1" max="{{ producto.cantidad }}" required class="form-control" placeholder="Ingrese cantidad">
+                <small class="form-text text-muted">Cantidad actual: {{ producto.cantidad }}</small>
+            </div>
+            <button type="submit" class="btn btn-danger btn-block">Reducir Stock</button>
+        </form>
+        <!-- Mensajes de éxito o error -->
+        {% if messages %}
+            <div class="mt-3">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Agrega Bootstrap JS y dependencias desde un CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

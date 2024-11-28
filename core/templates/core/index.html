@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title>Página Principal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4; /* Fondo claro */
+            color: #333; /* Color del texto */
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2e7d32; /* Color del nav */
+            padding: 10px 20px;
+            height: 70px; /* Altura fija para el nav */
+        }
+        #logo {
+            height: 150px; /* Altura fija para el contenedor del logo */
+            overflow: hidden; /* Oculta cualquier desbordamiento */
+        }
+        #logo img {
+            max-height: 100%; /* El logo ocupará el 100% de la altura del contenedor */
+            height: auto; /* Mantiene la proporción del logo */
+        }
+        ul {
+            list-style-type: none; /* Elimina los puntos de la lista */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Usa flexbox para alinear los elementos en fila */
+        }
+        li {
+            margin: 0 15px; /* Espaciado entre los elementos de la lista */
+        }
+        a {
+            color: white; /* Color del texto */
+            text-decoration: none; /* Sin subrayado */
+            padding: 10px;
+            transition: background-color 0.3s; /* Transición suave */
+        }
+        a:hover {
+            background-color: #ddd; /* Color de fondo al pasar el mouse */
+            color: black; /* Color del texto al pasar el mouse */
+        }
+        .content {
+            padding: 20px;
+            max-width: 1200px; /* Ancho máximo para el contenido */
+            margin: auto; /* Centrar el contenido */
+        }
+        .section {
+            margin-bottom: 40px; /* Espaciado entre secciones */
+            background-color: white; /* Fondo blanco para las secciones */
+            padding: 20px;
+            border-radius: 8px; /* Bordes redondeados */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+        }
+        h2 {
+            color: #2e7d32; /* Color del encabezado */
+            margin-top: 0;
+        }
+        p {
+            color: #666; /* Color del texto */
+        }
+        .case-study {
+            background-color: #f9f9f9; /* Fondo claro para el caso de estudio */
+            border: 1px solid #ccc; /* Borde del caso de estudio */
+            padding: 15px;
+            border-radius: 5px; /* Bordes redondeados */
+        }
+        .case-study h3 {
+            color: #2e7d32; /* Color del título del caso de estudio */
+        }
+        footer {
+            background-color: #333; /* Color de fondo del footer */
+            color: white; /* Color del texto del footer */
+            text-align: center; /* Centrar el texto */
+            padding: 20px 0; /* Espaciado vertical */
+            position: relative; /* Para el posicionamiento */
+            bottom: 0; /* Asegura que esté al final */
+            width: 100%; /* Ancho completo */
+        }
+        .user-panel {
+            position: absolute; /* position: absolute; /* Posiciona el panel de usuario */
+            background-color: white; /* Fondo blanco */
+            border: 1px solid #ccc; /* Borde gris claro */
+            border-radius: 5px; /* Bordes redondeados */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra */
+            padding: 10px; /* Espaciado interno */
+            z-index: 1000; /* Asegura que esté por encima de otros elementos */
+            right: 20px; /* Ajusta la posición a la derecha */
+            top: 70px; /* Ajusta la posición debajo del nav */
+            display: none; /* Inicialmente oculto */
+        }
+        .user-panel a {
+            display: block; /* Cada enlace en una nueva línea */
+            color: #4caf50; /* Color del enlace */
+            padding: 5px 10px; /* Espaciado para los enlaces */
+            text-decoration: none; /* Sin subrayado */
+        }
+        .user-panel a:hover {
+            background-color: #f0f0f0; /* Color de fondo al pasar el mouse */
+        }
+        .user-info {
+            display: flex; /* Flexbox para alinear elementos */
+            align-items: center; /* Centrar verticalmente */
+            background-color: #4caf50; /* Fondo verde para la sección de usuario */
+            padding: 10px 15px; /* Espaciado interno */
+            border-radius: 5px; /* Bordes redondeados */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+            justify-content: center; /* Centrar el contenido */
+            position: relative; /* Para el posicionamiento */
+        }
+        .user-info span {
+            margin-right: 15px; /* Espaciado entre el saludo y los enlaces */
+            color: white; /* Color del texto */
+            font-weight: bold; /* Negrita para el nombre de usuario */
+        }
+        .user-info a {
+            background-color: #fff; /* Fondo blanco para los enlaces */
+            color: #4caf50; /* Color del texto de los enlaces */
+            padding: 8px 12px; /* Espaciado interno para los botones */
+            border-radius: 3px; /* Bordes redondeados para los botones */
+            transition: background-color 0.3s, color 0.3s; /* Transición suave */
+        }
+        .user-info a:hover {
+            background-color: #4caf50; /* Fondo verde al pasar el mouse */
+            color: white; /* Color del texto al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div id="logo">
+            <img src="{% static 'images/limonatura_logo.png' %}" alt="Logo de la empresa" />
+        </div>
+        <ul>
+            <li><a href="{% url 'index' %}">Inicio</a></li>
+            <li><a href="{% url 'lista_productos' %}">Productos</a></li>
+        </ul>
+        <div class="user-info">
+            {% if user.is_authenticated %}
+                <span id="username" style="cursor: pointer;">Hola, {{ user.username }}!</span>
+                <div id="user-panel" class="user-panel">
+                    {% with user.perfilusuario.perfil as perfil %}
+                        {% if perfil == 'admin' or perfil == 'vendedor' %}
+                        <a href="{% url 'admin:index' %}">Administración</a>
+                        <a href="{% url 'agregar_producto' %}">Agregar Producto</a> <!-- Enlace para agregar producto -->
+                        {% endif %}
+                    {% endwith %}
+                    <a href="{% url 'profile' %}">Perfil</a>
+                    <a href="{% url 'settings' %}">Configuraciones</a>
+                    <a href="{% url 'help' %}">Ayuda</a>
+                    <a href="{% url 'logout' %}">Cerrar sesión</a>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}">Iniciar sesión</a>
+                <a href="{% url 'registrar' %}">Registrarse</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="content">
+        <!-- Sección de Introducción -->
+        <div class="section">
+            <h2>Bienvenido a Nuestro Sitio</h2>
+            <p>Descubre la esencia de Limonatura y nuestros productos artesanales. ¡Explora nuestras colecciones, promociones y mucho más!</p>
+        </div>
+
+        <!-- Sección de Caso de Estudio -->
+        <div class="section case-study">
+            <h3>Sobre la empresa</h3>
+            <p>Limonatura ofrece una variedad de productos que incluyen joyería de autor, carteras, vestimenta y calzado, todos con un enfoque en la sostenibilidad y la conexión con la naturaleza. El logo de la empresa, que representa un árbol, refleja esta filosofía, y se espera que el diseño del sitio web también incorpore elementos naturales en su estética.</p>
+            <p>La empresa opera mediante catálogos, que se generan cada dos meses y se promocionan a través de Instagram. Sin embargo, Liam señala que esta red social solo actúa como una vitrina y no gestiona las ventas. Por lo tanto, es fundamental que el nuevo sitio web incluya una sección para estos catálogos, permitiendo a los clientes acceder a nuevos productos y promociones de manera más efectiva.</p>
+            <p>Además, Limonatura ofrece packs promocionales que permiten a los clientes disfrutar de una mayor variedad de productos, ayudando a liberar stock y mantener la frescura de la oferta. Este enfoque en la variedad y la experiencia del cliente es clave para el crecimiento continuo de la empresa.</p>
+        </div>
+
+        <!-- Sección de Características -->
+        <div class="section">
+            <h2>Nuestras Características</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>Productos Sostenibles</h3>
+                    <p>Ofrecemos una variedad de productos elaborados con materiales sostenibles y respetuosos con el medio ambiente.</p>
+                </div>
+                <div class="feature">
+                    <h3>Catálogos Actualizados</h3>
+                    <p>Descubre nuestras últimas colecciones a través de catálogos que se actualizan cada dos meses.</p>
+                </div>
+                <div class="feature">
+                    <h3>Promociones Especiales</h3>
+                    <p>Aprovecha nuestros packs promocionales y ofertas exclusivas que te permitirán disfrutar de más variedad.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Limonatura. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+        document.getElementById('username').addEventListener('click', function() {
+            var panel = document.getElementById('user-panel');
+            panel.style.display = (panel.style.display === 'none' || panel.style.display === '') ? 'block' : 'none';
+        });
+    
+        // Close the panel if clicking outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('#username')) {
+                var panel = document.getElementById('user-panel');
+                if (panel.style.display === 'block') {
+                    panel.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

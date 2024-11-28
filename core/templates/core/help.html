@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayuda</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e9f5e9; /* Color de fondo suave */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #28a745; /* Verde principal */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            margin: 0 15px;
+            color: white; /* Color del texto */
+            text-decoration: none; /* Sin subrayado */
+            padding: 10px 15px;
+            border-radius: 5px; /* Bordes redondeados */
+            transition: background-color 0.3s, color 0.3s; /* Transición suave */
+        }
+        nav a:hover {
+            background-color: #218838; /* Verde más oscuro al pasar el mouse */
+            color: white; /* Color del texto al pasar el mouse */
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #28a745; /* Verde principal */
+            margin-bottom: 10px;
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        section h3 {
+            color: #218838; /* Verde más oscuro */
+        }
+        section p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Centro de Ayuda</h1>
+        <nav>
+            <a href="{% url 'index' %}">Inicio</a>
+            <a href="{% url 'profile' %}">Perfil</a>
+            <a href="{% url 'settings' %}">Configuraciones</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Preguntas Frecuentes</h2>
+            <ul>
+                <li><strong>¿Cómo restablezco mi contraseña?</strong> - Puedes restablecer tu contraseña desde la página de configuraciones.</li>
+                <li><strong>¿Cómo actualizo mi información personal?</strong> - Actualiza tu información en la sección de perfil.</li>
+                <li><strong>¿Dónde puedo encontrar más ayuda?</strong> - Consulta nuestra documentación o contacta al soporte.</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
