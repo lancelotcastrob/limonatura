@@ -6,7 +6,7 @@ Características Principales:
 - Interfaz Gráfica: Diseño corporativo alineado con la temática de la naturaleza.
 - Seguridad y Acceso: Implementación de niveles de acceso para usuarios (administrador, vendedores y clientes) con validación de RUT y contraseñas.
 - Gestión de Productos: Permite el ingreso de al menos 10 tipos de productos, incluyendo descripción, código SKU, cantidades y una imagen descriptiva.
-[Las siguientes características se encuentra en proceso]
+Las siguientes características se encuentra en proceso:
 - Reportes: Generación de reportes en Excel para usuarios creados y detalle de productos en stock, accesibles solo para el administrador.
 - Proceso de Venta: Simulación de ventas a través del front-office, incluyendo login de cliente, selección de productos, métodos de pago y emisión de boletas electrónicas en PDF.
 
